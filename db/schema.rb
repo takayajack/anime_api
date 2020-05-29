@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_04_121015) do
+ActiveRecord::Schema.define(version: 2020_05_29_131325) do
+
+  create_table "animes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "title", limit: 35, null: false
+    t.string "title_short", limit: 10
+    t.integer "release_year", limit: 2, null: false
+    t.integer "season", limit: 1, null: false
+    t.string "public_url"
+    t.string "thumbnail"
+    t.bigint "company_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_animes_on_company_id"
+  end
 
   create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -19,4 +32,5 @@ ActiveRecord::Schema.define(version: 2020_05_04_121015) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "animes", "companies"
 end
